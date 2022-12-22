@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>demo-parent</artifactId>
+        <groupId>com.xxx.unittest</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>demo-test</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+
+        <module.version>1.0.0-SNAPSHOT</module.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.xxx.unittest</groupId>
+            <artifactId>junit4-demo-app</artifactId>
+            <version>${module.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xxx.unittest</groupId>
+            <artifactId>junit5-demo-app</artifactId>
+            <version>${module.version}</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.8</version>
+                <executions>
+                    <execution>
+                        <id>report-aggregate</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report-aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludes>
+                        <!-- 不进行单测的字节码文件 -->
+                        <!-- .替换为/ -->
+                        <exclude>com/xxx/unittest/junit4demo/model/*</exclude>
+                        <exclude>com/xxx/unittest/junit4demo/DemoApp.class</exclude>
+                        <exclude>com/xxx/unittest/junit4demo/mockadapter/SystemWrapper.class</exclude>
+
+                        <exclude>com/xxx/unittest/junit5demo/DemoApp.class</exclude>
+                        <exclude>com/xxx/unittest/junit5demo/mockadapter/SystemWrapper.class</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
